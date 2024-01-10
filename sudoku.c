@@ -8114,7 +8114,10 @@ list(register Grid_t* grid, int format, int status, Canon_t* can)
 							state.hit = hit;
 						}
 						else
+						{
 							s = subcanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
+							for (int cell=0; cell<81; cell++ ) { if ( s[cell] == '0' ) { s[cell] = '.'; } }
+						}
 						break;
 					case 'o':
 					case 'O':
