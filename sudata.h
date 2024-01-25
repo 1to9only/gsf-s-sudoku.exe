@@ -19,8 +19,10 @@
 #define LL		"I64"
 typedef __int64 int64_t;
 typedef unsigned __int64 uint64_t;
+#ifndef _TCC
 typedef long int32_t;
 typedef unsigned long uint32_t;
+#endif
 #include <process.h>
 #define getpid	_getpid
 #else
@@ -125,5 +127,6 @@ typedef struct Sudata_s
 extern Sudata_t		data;
 
 extern char*		subcanon(Canon_t*, Grid_t*, char*, char*, int, int);
+extern char*		trucanon(Canon_t*, Grid_t*, char*, char*, int, int);
 
 #endif

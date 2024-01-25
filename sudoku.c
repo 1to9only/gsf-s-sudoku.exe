@@ -1640,7 +1640,7 @@ static Propagate_t	ps;
 #define pause()		Sleep(24 * 60 * 60 * 1000)
 
 static uint64_t
-strtoull(const char* s, char** p, int b)
+strtoulll(const char* s, char** p, int b)
 {
 	uint64_t	n;
 
@@ -8115,7 +8115,12 @@ list(register Grid_t* grid, int format, int status, Canon_t* can)
 						}
 						else
 						{
+#ifndef _TRUEMINLEX
 							s = subcanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
+#endif
+#ifdef _TRUEMINLEX
+							s = trucanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
+#endif
 							for (int cell=0; cell<81; cell++ ) { if ( s[cell] == '0' ) { s[cell] = '.'; } }
 						}
 						break;
@@ -19144,7 +19149,7 @@ options(register char** v, int copy, int* code)
 			case 'n':
 				if (isdigit(*(s + 1)))
 				{
-					state.loop = strtoull(s + 1, &s, 0);
+					state.loop = strtoulll(s + 1, &s, 0);
 					s--;
 				}
 				else
@@ -19154,7 +19159,7 @@ options(register char** v, int copy, int* code)
 			case 'N':
 				if (!*++s && !(s = *v++))
 					goto nooptarg;
-				state.input->input = state.shown = state.valid = strtoull(s, &s, 0) - 1;
+				state.input->input = state.shown = state.valid = strtoulll(s, &s, 0) - 1;
 				s--;
 				continue;
 			case 'o':
@@ -19381,7 +19386,7 @@ options(register char** v, int copy, int* code)
 			case 'r':
 				if (!*++s && !(s = *v++))
 					goto nooptarg;
-				state.seed = strtoull(s, &s, 0);
+				state.seed = strtoulll(s, &s, 0);
 				s--;
 				continue;
 			case 'R':
