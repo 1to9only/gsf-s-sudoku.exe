@@ -127,6 +127,7 @@ typedef struct Sudata_s
 extern Sudata_t		data;
 
 extern char*		subcanon(Canon_t*, Grid_t*, char*, char*, int, int);
-extern char*		trucanon(Canon_t*, Grid_t*, char*, char*, int, int);
+extern char*		mincanon(Canon_t*, Grid_t*, char*, char*, int, int);
+extern char*		maxcanon(Canon_t*, Grid_t*, char*, char*, int, int);
 
 #endif

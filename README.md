@@ -30,28 +30,38 @@ output:
 ```
 For minlex:
 ```
-sudoku.exe -qFN -f%#mc puzzles.txt > output.txt
+sudoku.exe -f%#mc puzzles.txt > output.txt
 
-sudoku.exe -qFN -f%#mc 45.....6......17..8...............92....7.1..5...36..........58..1..7............
+sudoku.exe -f%#mc 45.....6......17..8...............92....7.1..5...36..........58..1..7............
 output:
 ................12..3..4..........56....4.3...1..78........34...2.......19.....8.
 ```
 For solution-minlex:
 ```
-sudoku.exe -qFN -f%#.c puzzles.txt > output.txt
+sudoku.exe -f%#.c puzzles.txt > output.txt
 
-sudoku.exe -qFN -f%#.c 45.....6......17..8...............92....7.1..5...36..........58..1..7............
+sudoku.exe -f%#.c 45.....6......17..8...............92....7.1..5...36..........58..1..7............
 output:
 .2..5..8....1....6.9..3......1...........297........2....6.4.....6..8..1.........
 ```
+## sudoku64.exe [only]
 For true-minlex [For this I've replaced the subcanon() function with my own minlex() function (source not included)]:
 ```
-sudoku64.exe -qFN -f%#mc puzzles.txt > output.txt
+sudoku64.exe -f%#mc puzzles.txt > output.txt
 
-sudoku64.exe -qFN -f%#mc 45.....6......17..8...............92....7.1..5...36..........58..1..7............
+sudoku64.exe -f%#mc 45.....6......17..8...............92....7.1..5...36..........58..1..7............
 output:
 ................12..1..3..4.....1.3..5....6...7..4.8......7.......59...7..3......
 ```
+For maxlex [Use the -f%#**M**c option, and I've added my own maxlex() function (source not included)]:
+```
+sudoku64.exe -f%#Mc puzzles.txt > output.txt
+
+sudoku64.exe -f%#Mc 45.....6......17..8...............92....7.1..5...36..........58..1..7............
+output:
+98.7.....7..............6..5...4..7...3..6.......2..8...65..3.....1.3............
+```
+Note: In sudoku.exe, -f%#Mc is same as -f%#mc, i.e. outputs minlex form.
 ### Comparison
 Comparison of time taken to minlex the 49158 17-clues sudokus:
 ```
@@ -62,6 +72,11 @@ sudoku.exe      tcc compiler     3,868 ms
 sudoku.exe      gcc compiler     1,952 ms
 
 sudoku64.exe    true minlex      8,813 ms
+
+```
+Time taken to maxlex the 49158 17-clues sudokus:
+```
+sudoku64.exe    maxlex            25.3 s
 
 ```
 &nbsp;

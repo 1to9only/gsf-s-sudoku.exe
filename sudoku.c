@@ -8102,7 +8102,7 @@ list(register Grid_t* grid, int format, int status, Canon_t* can)
 						*s = 0;
 						s = tmp;
 						break;
-					case 'm':
+					case 'm': /* minlex */
 						if (w == 27 || w == 54)
 						{
 							try = *grid;
@@ -8119,10 +8119,19 @@ list(register Grid_t* grid, int format, int status, Canon_t* can)
 							s = subcanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
 #endif
 #ifdef _TRUEMINLEX
-							s = trucanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
+							s = mincanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
 #endif
 							for (int cell=0; cell<81; cell++ ) { if ( s[cell] == '0' ) { s[cell] = '.'; } }
 						}
+						break;
+					case 'M': /* maxlex */
+#ifndef _TRUEMINLEX
+							s = subcanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
+#endif
+#ifdef _TRUEMINLEX
+							s = maxcanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
+#endif
+							for (int cell=0; cell<81; cell++ ) { if ( s[cell] == '0' ) { s[cell] = '.'; } }
 						break;
 					case 'o':
 					case 'O':
