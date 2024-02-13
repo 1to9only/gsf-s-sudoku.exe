@@ -44,6 +44,15 @@ sudoku.exe -f%#.c 45.....6......17..8...............92....7.1..5...36..........5
 output:
 .2..5..8....1....6.9..3......1...........297........2....6.4.....6..8..1.........
 ```
+For solution-maxlex [Use the -f%#**N**c option]:
+```
+sudoku.exe -f%#Nc puzzles.txt > output.txt
+
+sudoku.exe -f%#Nc 45.....6......17..8...............92....7.1..5...36..........58..1..7............
+output:
+.8..5..2....9....4.1..7......9...........813........8....4.6.....4..2..9.........
+```
+Solution-maxlex is just renumbering the sudoku-minlex grid using mapping from minlex row 1 (123456789) to maxlex row 1 (987654321).
 ## sudoku64.exe [only]
 For true-minlex [For this I've replaced the subcanon() function with my own minlex() function (source not included)]:
 ```

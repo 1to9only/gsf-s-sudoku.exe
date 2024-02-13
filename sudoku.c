@@ -8102,7 +8102,7 @@ list(register Grid_t* grid, int format, int status, Canon_t* can)
 						*s = 0;
 						s = tmp;
 						break;
-					case 'm': /* minlex */
+					case 'm': /* [m]inlex */
 						if (w == 27 || w == 54)
 						{
 							try = *grid;
@@ -8124,7 +8124,7 @@ list(register Grid_t* grid, int format, int status, Canon_t* can)
 							for (int cell=0; cell<81; cell++ ) { if ( s[cell] == '0' ) { s[cell] = '.'; } }
 						}
 						break;
-					case 'M': /* maxlex */
+					case 'M': /* [M]axlex */
 #ifndef _TRUEMINLEX
 							s = subcanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
 #endif
@@ -8132,6 +8132,14 @@ list(register Grid_t* grid, int format, int status, Canon_t* can)
 							s = maxcanon(0, grid, 0, tmp, l ? l : '0', state.transpose);
 #endif
 							for (int cell=0; cell<81; cell++ ) { if ( s[cell] == '0' ) { s[cell] = '.'; } }
+						break;
+					case 'N': /* solutio[N]-maxlex */
+							g = grid;
+							i = state.input->exemplar;
+							if (!can)
+								can = canon(g, 0, 0, 0);
+							s = canpuzzle(can, g, i, 0, tmp, l);
+							for (int cell=0; cell<81; cell++ ) { s[cell] = (s[cell]=='0')?'.':10-(s[cell]-'0')+'0'; }
 						break;
 					case 'o':
 					case 'O':
@@ -8327,6 +8335,7 @@ list(register Grid_t* grid, int format, int status, Canon_t* can)
 						if (!can)
 							can = canon(g, 0, 0, 0);
 						s = canpuzzle(can, g, i, 0, tmp, l);
+						for (int cell=0; cell<81; cell++ ) { if ( s[cell] == '0' ) { s[cell] = '.'; } }
 						break;
 					}
 					goto string;
